@@ -115,7 +115,7 @@ export default function AdminOrders() {
         {/* Orders List */}
         <div className="space-y-4">
           {filteredOrders.map((order) => {
-            const config = statusConfig[order.status as keyof statusConfig]
+            const config = statusConfig[order.status as keyof typeof statusConfig]
             const StatusIcon = config.icon
             return (
               <Card key={order.id}>

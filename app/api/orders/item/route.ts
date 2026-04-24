@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase"
 
 export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  request: NextRequest
 ) {
   try {
-    const { id } = await params
     const body = await request.json()
-    const { status } = body
+    const { id, status } = body
+
+    if (!id) {
+      return NextResponse.json({ error: "Order ID is required" }, { status: 400 })
+    }
 
     const supabase = createClient()
 
